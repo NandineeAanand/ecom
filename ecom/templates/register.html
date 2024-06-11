@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content%}
+
+
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded">
+                            <h2 class="section-heading mb-5">
+                                <span class = "section-heading-upper" >Register Now</span>
+                                <span class="section-heading-lower">We're Open to Shop</span>
+                            </h2>
+                        
+                                <p>Please enter your name, username and password!  </p>        
+                                <form class="form-with-validation" method="POST" action="{% url 'register' %}">                                      {% csrf_token %}
+                                {{form.as_p}}
+                              
+                                <br><br>
+                                <div class="intro-button mx-auto"><button type="submit" class="btn btn-secondary btn-lg" >Sign Up</button></div>
+                                <br>
+                                
+                                </form>
+                                
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

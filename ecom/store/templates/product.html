@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content%}
+<br><br><br>
+
+<section class="page-section about-heading">
+  <div class="container">
+    
+      <div class="about-heading-content">
+        <div class="col-xl-9 col-lg-10 mx-auto">
+          
+          <div class="bg-faded rounded p-5">
+            {% if product.is_sale %}
+            <div class="badge text-red bg-dark " style="top:0rem; right: 0rem ">Sale</div><br></br>
+            {% endif%}
+            <div class="row">
+            <img class="img-fluid rounded about-heading-img mb-3 mb-lg-5" src="{{product.image.url}}" alt="{{product.name}}" />
+              <h2 class="section-heading mb-4">
+                <span class="section-heading-upper">{{product.name}}</span>
+                <span class="section-heading-lower">{{product.category}}</span>
+              </h2>
+              <p>{{product.description}}</p>
+              <p class="mb-0">
+                {% if product.is_sale %}
+                  Price : <strike>₹{{product.price}}</strike>&nbsp;{{product.sale_price}}
+                {% else %}
+                  Price : ₹{{product.price}}
+                {% endif%}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+{% endblock %}
