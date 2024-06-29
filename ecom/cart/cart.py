@@ -22,7 +22,7 @@ class Cart():
     
     def get_products(self):
         product_ids=self.cart.keys()
-        products=Products.objects.filter(id_in=product_ids)
+        products=Product.objects.filter(id__in=product_ids)
         return products
         
     

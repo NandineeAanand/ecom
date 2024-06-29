@@ -11150,12 +11150,14 @@ p {
   text-align: left !important;
 }
 .card-img-left {
-  width: 100%;
-  height: auto;
+  width: 100px;
+  height: 100px;
   /* max-width: 200px; */
   object-fit: cover;
   border-top-left-radius: var(--bs-card-inner-border-radius);
   border-bottom-left-radius: var(--bs-card-inner-border-radius);
+  float: right; 
+  margin-left: 1rem;
 }
 .glyphicon {
   position: relative;
@@ -11181,4 +11183,26 @@ p {
        url('../fonts/glyphicons-halflings-regular.woff') format('woff'), 
        url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), 
        url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+.product-img {
+  width: 100px; /* Set a fixed width */
+  height: 100px; /* Set a fixed height */
+  object-fit: cover; /* Ensure the image covers the entire area without distortion */
+  border-radius: var(--bs-card-inner-border-radius); /* Apply border radius */
+  margin-left: 1rem;
+}
+
+.product-details {
+  flex: 1; /* Allow the details section to grow and take available space */
+  
+}
+
+.d-flex {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+}
+
+.ml-4 {
+  margin-left: 1rem; /* Add space between the image and the text */
 }
