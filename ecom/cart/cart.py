@@ -1,4 +1,4 @@
-from store.models import Products
+from store.models import Product
 
 class Cart():
 
