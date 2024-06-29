@@ -70,11 +70,4 @@ def category_view(request, xyz):
     except Category.DoesNotExist:
         messages.error(request, "This category doesn't exist! Please try something different.")
         return redirect('index')
-    # try:
-    #     category=Category.objects.get(name='xyz')
-    #     products=Product.objects.filter(category=category)
-    #     return render(request, 'category.html',{'products':products,'category':category})
-
-    # except:
-    #     messages.success(request, ("This category doesn't exists!Please try something different."))
-    #     return redirect('index')
+    

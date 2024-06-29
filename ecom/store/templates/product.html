@@ -25,11 +25,37 @@
                 {% else %}
                   Price : ₹{{product.price}}
                 {% endif%}
-              </p>
+              </p><br><br>
+              <div class = "intro-button-container">
+                <div class="intro-button mx-auto"><button type=" button" value="{{ product.id }}" class="btn btn-outline-primary btn-secondary " id="add-cart">Add to Cart</button>
+                </div><br>
+            </div>
             </div>
           </div>
         </div>
       </div>
   </div>
 </section>
+
+<script>
+  $(document).on('click','#add-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '{% url 'cart_add' %}',
+      data: {
+        product_id: $('#add-cart').val(),
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+      },
+      success: function(json){
+        {% comment %} console.log(json) {% endcomment %}
+        document.getElementById('cart_quantity').textContent=json.Qty
+      },
+      error: function(xhr, errmsg, err){
+        
+      }
+    });
+  })
+</script>
 {% endblock %}

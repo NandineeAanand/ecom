@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-o&d$6h-flb98-+@6dy53-9$7i-@sf@uy+7bobymf8my!x4!$qh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app','127.0.0.1' ]
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +65,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'ecom.context_processors.category_context',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -118,8 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS=os.path.join(BASE_DIR,'static'),
+STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles_build','static')
 
-STATICFILES_DIRS=['static/']
 
 MEDIA_URL='media/'
 
