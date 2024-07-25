@@ -19,29 +19,6 @@
                 </div>
             </div>
         </section>
-        {% comment %} <div class="container"> 
-            {% for product in cart_products %}
-            <div class="bg-faded rounded p-5 card col-xl-9 col-lg-10 mx-auto mb-4">
-                <div class="d-flex align-items-center">
-                <img class="img-fluid rounded card-img-left mb-3 mb-lg-5" src="{{product.image.url}}" alt="{{product.name}}" />
-                  <h2 class="section-heading mb-4">
-                    <span class="section-heading-upper">{{product.name}}</span>
-                    <span class="section-heading-lower">{{product.category}}</span>
-                  </h2>
-                  <p>{{product.description}}</p>
-                  <p class="mb-0">
-                    {% if product.is_sale %}
-                      Price : <strike>₹{{product.price}}</strike>&nbsp;{{product.sale_price}}
-                    {% else %}
-                      Price : ₹{{product.price}}
-                    {% endif%}
-                  </p><br><br>
-                  
-                </div>
-                </div>
-              </div><br/><br>
-            {% endfor %}
-        </div> {% endcomment %}
         <div class="container">
         {% if cart_products %}
             {% for product in cart_products %}
@@ -60,12 +37,50 @@
                     {% else %}
                       Price : ₹{{product.price}}
                     {% endif %}
-                  </p>
+                  </p><br>
+                  <div class="row justify-content-left">
+                    <div class="col-md-3">Quantity:</div>
+                    <div class="col-md-3">
+                      <select class="form-select mb-3" aria-label="Default select example" id="select{{product.id}}">
+                      <option selected>
+                        {% for key,value in quantities.items %}
+                            {% if key == product.id|slugify %}
+                                {{value}}
+                            {% endif %}
+                        {% endfor %}
+                      </option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5 ">5</option>
+                      </select>
+
+                      
+                    </div>
+                    <div class="col-md-3"><button type="button" data-index="{{product.id}}" class="btn btn-secondary update-cart">Update</button></div><br></br>
+                    <div class="col-md-3"><button type="button" data-index="{{product.id}}" class="btn btn-danger delete-product">Remove</button></div>
+                  </div>
+                  
                 </div>
                 <img class="product-img " src="{{product.image.url}}" alt="{{product.name}}" />
+                
+              </div>
+              
+            </div>
+            
+            {% endfor %}
+            <div class="bg-faded rounded p-5 card col-xl-9 col-lg-10 mx-auto mb-4">
+              <div class="d-flex align-items-center">
+                
+                <div class="product-details ml-3 row">
+                  <h2 class="section-heading mb-4 col-md-9">
+                    <span class="section-heading-upper"><strong>Total: ₹ {{total}} </strong></span>
+                  </h2>
+                  <a class="btn btn-xl btn-success col-md-3" href="{% url 'checkout' %}"><h4>Checkout</h4></a>
+                </div>
               </div>
             </div>
-            {% endfor %}
             {% else %}
             <div class="bg-faded rounded p-5 card col-xl-5 col-lg-10 mx-auto mb-4">
                 <div class="d-flex flex-column align-items-center justify-content-center text-center">
@@ -84,4 +99,48 @@
         {% endif %}
           </div>
           
-{% endblock %}
+
+
+<script>
+    $(document).on('click','.update-cart', function(e){
+      e.preventDefault();
+      var productId=$(this).data('index');
+      $.ajax({
+        type: 'POST',
+        url: '{% url 'cart_update' %}',
+        data: {
+          product_id: productId,
+          product_qty: $('#select'+productId+' option:selected').val(),
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          action: 'post'
+        },
+        success: function(json){
+          location.reload();
+        },
+        error: function(xhr, errmsg, err){
+          console.error("error",error);
+        }
+      });
+    })
+
+    $(document).on('click','.delete-product', function(e){
+      e.preventDefault();
+      var productId=$(this).data('index');
+      $.ajax({
+        type: 'POST',
+        url: '{% url 'cart_delete' %}',
+        data: {
+          product_id: productId,
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          action: 'post'
+        },
+        success: function(json){
+          location.reload();
+        },
+        error: function(xhr, errmsg, err){
+          console.error("error",error);
+        }
+      });
+    })
+  </script>
+  {% endblock %}

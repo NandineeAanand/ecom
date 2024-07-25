@@ -1,0 +1,6 @@
+.env
+.Python
+staticfiles/
+media/
+virtual/
+

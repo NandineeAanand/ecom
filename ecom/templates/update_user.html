@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content%}
+
+
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded">
+                            <h2 class="section-heading mb-5">
+                                <span class = "section-heading-upper" >Update  Profile</span>
+                                <span class="section-heading-lower">Update your user profile</span>
+                            </h2>
+                        
+                                      
+                                <form class="" method="POST" action="{% url 'update_user' %}">                                      {% csrf_token %}
+                                {{user_form.as_p}}
+                              
+                                <br><br>
+                                <div class="intro-button mx-auto"><button type="submit" class="btn btn-secondary btn-lg" >Update Profile</button></div>
+                                <br>
+                                
+                                </form>
+                                <div class="intro-button mx-auto"><a class="btn btn-success btn-lg" href="{% url 'update_password' %}">Update Password</a></div>    
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

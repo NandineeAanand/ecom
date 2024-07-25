@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block content %}
+        <br><br><br>
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded">
+                            <h2 class="section-heading mb-4">
+                                <span class="section-heading-upper">Search Products</span>
+                                    <span class="section-heading-lower">Find what you are looking for..</span>
+                            </h2>
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section about-heading">
+            <div class="container">
+                <div class="about-heading-content">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-10 mx-auto">
+                            
+                        </br></br>
+                        <div class="card bg-faded rounded col-xl-35 col-lg-10 mx-auto">
+                            <h1 class="card-header ">
+                              Search Products
+                            </h1>
+                            <div class="card-body row">
+                                <form method="POST" action="{% url 'search' %}">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                       
+                                        <input type="text" class="form-control"  placeholder="Search for Products" name="searched">
+                                      </div>
+                                      <div class="mb-3">
+                                        <div class="intro-button mx-auto"><button type="submit" class="btn btn-secondary" >Search</button></div>
+                                      </div>
+                                </form>
+                            </div>
+                        </div>
+                        {% if searched %}
+                            {% for product in searched%}
+                                {% if product.is_sale %}
+                            <section class="page-section">
+                                <div class="container">
+                                    <div class="product-item">
+                                        <div class="product-item-title d-flex">
+                                            <div class="bg-faded p-5 d-flex ms-auto rounded">
+                                                <div class="badge text-red " style="top:0rem; right: 0rem justify-content:left;">Sale</div>
+                                                <h2 class="section-heading mb-0">
+                                                    <span class="section-heading-upper">{{product.name}}</span>
+                                                    <span class="section-heading-lower"><strike>₹{{product.price}}</strike>&nbsp₹{{product.sale_price}}</span>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                        <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{ product.image.url}}" alt="..." />
+                                        
+                                        <div class="product-item-description d-flex me-auto">
+                                            <div class="bg-faded p-5 rounded">
+                                                <h2 class="section-heading mb-0">
+                                                    <span class="section-heading-lower">{{product.category}}</span></h2>
+                            
+                                                <p class="mb-0">{{product.description}}</p>
+                                                <div class = "intro-button-container">
+                                                    <div class="intro-button mx-auto"><a class="btn btn-outline-primary btn-secondary " href="{% url 'product' product.id%}">Product Details</a>
+                                                    </div><br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            {% else %}
+                        <section class="page-section">
+                            <div class="container">
+                                <div class="product-item">
+                                    <div class="product-item-title d-flex">
+                                        <div class="bg-faded p-5 d-flex ms-auto rounded">
+                                            <h2 class="section-heading mb-0">
+                                                <span class="section-heading-upper">{{product.name}}</span>
+                                                
+                                                <span class="section-heading-lower">₹{{product.price}}</span>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{ product.image.url}}" alt="..." />
+                                    
+                                    <div class="product-item-description d-flex me-auto">
+                                        <div class="bg-faded p-5 rounded">
+                                            <h2 class="section-heading mb-0">
+                                                <span class="section-heading-lower">{{product.category}}</span></h2>
+                        
+                                            <p class="mb-0">{{product.description}}</p><br>
+                                            <div class = "intro-button-container">
+                                                <div class="intro-button mx-auto"><a class="btn btn-outline-primary btn-secondary " href="{% url 'product' product.id%}">Product Details</a>
+                                                </div><br>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+{% endblock %}

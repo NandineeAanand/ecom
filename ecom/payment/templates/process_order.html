@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% block content %}
+</br></br></br>
+<section class="page-section about-heading">
+    <div class="container">
+        <div class="about-heading-content">
+            <div class="row">
+                <div class="col-xl-9 col-lg-10 mx-auto">
+                    <div class="bg-faded rounded p-5">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">Processing your order</span>
+                            <span class="section-heading-lower">this is temporary...</span>
+                        </h2>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-10 mx-auto">
+                <div class="bg-faded card text-center rounded p-5 mb-4">
+                    <div class="d-flex align-items-center">
+                          
+                        <div class="product-details ml-4">
+                            <h2 class=" card-header section-heading mb-4">
+                              <span class="section-heading-upper">Order Summary</span>
+
+                            </h2>
+                            <div class="card-body">
+                                {% for product in cart_products %}
+                                
+                                <div class="row justify-content-left">
+                                    <div class="col-md-5">{{product.name}}</div></br>
+                                    <div class="col-md-3"><p class="mb-0">
+                                        {% if product.is_sale %}
+                                          Price : ₹{{product.sale_price}}
+                                        {% else %}
+                                          Price : ₹{{product.price}}
+                                        {% endif %}
+                                      </p></br></div>
+                                    
+                                    <div class="col-md-3">Quantity:
+                                    
+                                    {% for key,value in quantities.items %}
+                                        {% if key == product.id|slugify %}
+                                            {{value}}
+                                        {% endif %}
+                                    {% endfor %}
+                                    </div></br>
+                                
+                                </div>
+                                
+                                {% endfor %}
+                            </div>
+                            <div class="card-footer row justify-content-left">
+                                <div class="col-md-4"><strong>
+                                    <h3 class=" justify-content-right">Total: ₹ {{total}}</h3> 
+                                </strong></div>
+                                
+                                
+                                
+                            </div>
+                        </br>
+                            <div class=" row justify-content-left">
+                                <div class="col-md-9">&nbsp;</div>
+                                <div class="col-md-3"><a href="{% url 'checkout' %}" class="btn btn-secondary "> Update Products </a></div></br>
+                            
+                            </div>
+                        
+                            
+                        </div>
+                          
+                          
+                        
+                        
+                      </div>
+                        
+                        
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+      
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-10 mx-auto">
+                <div class="bg-faded card text-center rounded p-5 mb-4">
+                    <div class="d-flex align-items-center">
+                        <div class="product-details ml-4">
+                            <h2 class=" card-header section-heading mb-4">
+                              <span class="section-heading-upper">Shipping Information</span>
+                            </h2>
+                            <div class="card-body">
+                                <div class="row justify-content-left">
+                                    <div class="col-md-3">Name: </div></br>
+                                    <div class="col-md-7">{{ shipping_info.shipping_full_name}}</div></br>
+                                    <div class="col-md-2">&nbsp;</div></br>
+                                    <div class="col-md-3">Email: </div></br>
+                                    <div class="col-md-7">{{ shipping_info.shipping_email}}</div></br>
+                                    <div class="col-md-2">&nbsp;</div></br>
+                                    <div class="col-md-3">Address: </div></br>
+                                    <div class="col-md-8 justify-text-left"> {{ shipping_info.shipping_address1}} {{ shipping_info.shipping_address2}}  </br> {{ shipping_info.shipping_city}} - {{ shipping_info.shipping_zipcode}}, {{ shipping_info.shipping_state}}, {{ shipping_info.shipping_country}}.</div></br>
+                                
+                               
+                                
+                                </div>
+                            </div>
+                        
+                            </br>
+                            <div class=" row justify-content-left">
+                                <div class="col-md-9">&nbsp;</div>
+                                <div class="col-md-3"><a href="{% url 'shipping_form' %}" class="btn btn-secondary ">&nbsp; Update Info &nbsp;</a></div></br>
+                                
+                            </div>
+                            
+                        </div>
+                          
+                          
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-10 mx-auto">
+                <div class="bg-faded card text-center rounded p-5 mb-4">
+                    <div class="d-flex align-items-center">
+                        <div class="product-details ml-4">
+                            <h2 class=" card-header section-heading mb-4">
+                              <span class="section-heading-upper">Payment Information</span>
+                            </h2>
+                            <div class="card-body">
+                                <form method="POST" action="{%  url 'process_order' %}">
+                                    {% csrf_token %}
+                                    {{billing_form.as_p}}
+                                </div>
+                                
+                            </br>
+                            <div class=" row justify-content-left">
+                                <div class="col-md-9">&nbsp;</div>
+                            </br>
+                            <div class="col-md-3"><button type="submit" class="btn btn-success">&nbsp; Pay Now &nbsp;</button></div>
+                        </form>
+                        </div>
+                            
+                        </div>
+                          
+                          
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

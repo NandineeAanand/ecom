@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+    <br><br><br>
+   
+    <section class="page-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 col-lg-10 mx-auto">
+                    <div class="bg-faded card text-center rounded p-5 mb-4">
+                        <div class="d-flex align-items-center">
+                              
+                            <div class="product-details ml-4">
+                                <h2 class=" card-header section-heading mb-4">
+                                  <span class="section-heading-upper">Order {{order.id}} - ₹ {{order.amount_paid}} </span>
+    
+                                </h2>
+                                <div class="card-body">
+                                    <div class="row justify-content-left">
+                                        <div class="col-md-3">Email: </div></br>
+                                        <div class="col-md-9">&nbsp; {{order.email}}</div></br>
+                                        <div class="col-md-3">Date Ordered: </div>
+                                        <div class="col-md-9">&nbsp; {{order.date_ordered}}</div>
+                                        {% if order.date_shipped %}
+                                        <div class="col-md-3">Date Shipped: </div>
+                                        <div class="col-md-9">&nbsp; {{order.date_shipped}}</div>
+                                        {% endif %}
+                                    </br>
+                                   
+                                    <div class="col-md-3">Full Name:</div></br>
+                                    <div class="col-md-9">&nbsp; {{order.full_name}}</div></br>
+                                    
+                                    <div class="col-md-3">Shipping Address: </div>
+                                    <pre class="col-md-9">&nbsp; {{order.shipping_address}}</pre></br>
+                                    <div class="col-md-3">Items: </div>
+                                    <div class="col-md-9">&nbsp; {% for item in items %}
+                                        {{item.product}} - {{item.quantity}} - {{item.price}}</br>
+                                    {% endfor %}
+                                </div></br>
+                            </div>
+                            
+                            
+                        </div>
+                        
+                    </br>
+                    <div class=" row justify-content-left">
+                        <div class="col-md-6">&nbsp;</div>
+                        <div class="col-md-4">
+                        {% if not order.shipped %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="shipping_status" value="true">
+                            <button type="submit" class="btn btn-success">Mark as shipped</button>
+                        </form>
+                            {% else %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="shipping_status" value="false">
+                            <button type="submit" class="btn btn-danger">Mark as not shipped</button>
+                            {% endif %}
+                        </form></div>
+                                {% if order.date_shipped %}
+                                <div class="col-md-2"><a href="{% url 'shipped_dash' %}" class="btn btn-secondary ">&nbsp; Back &nbsp;</a></div></br>
+                                {% else %}
+                                <div class="col-md-2"><a href="{% url 'not_shipped_dash' %}" class="btn btn-secondary ">&nbsp; Back &nbsp;</a></div></br>
+                                {% endif %}
+                            </div>
+                                
+                            </div>
+                              
+                              
+                            
+                            
+                          </div>
+                            
+                            
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+          
+{% endblock %}

@@ -26,11 +26,17 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('login/', views.login_user, name='login'),
     path('register/', views.register, name='register'),
+    path('update_password/', views.update_password, name='update_password'),
+    path('update_user/', views.update_user, name='update_user'),
+    path('update_info/', views.update_info, name='update_info'),
     path('logout/', views.logout_user, name='logout'),
     path('contact/', views.contact, name='contact'),
     path('category/<str:xyz>', views.category_view, name='category'),
+    path('category_summary/', views.category_summary, name='category_summary'),
     path('store/', include('store.urls')),
+    path('payment/', include('payment.urls')),
     path('cart/', include('cart.urls')),
+    path('search/', views.search, name='search'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

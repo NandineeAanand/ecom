@@ -10,19 +10,40 @@
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/">Home</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/about">About</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/store">Store</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/search">Search</a></li>
                 <li class="nav-item px-lg-4 dropdown">
                     <a class="nav-link text-uppercase dropdown-toggle" href="/store" id="storeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="storeDropdown">
-                        <li><a class="dropdown-item" href="/store">All Categories</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category_summary' %}">All Categories</a></li>
                         {% for category in categories %}
                         <li><a class="dropdown-item" href="{% url 'category' category.name %}">{{category.name}}</a></li>
                         {% endfor%}
                     </ul>
                 </li>
                 {% if user.is_authenticated %}
-                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/logout">Logout</a></li>
+                    
+                    <li class="nav-item px-lg-4 dropdown">
+                        <a class="nav-link text-uppercase dropdown-toggle" href="/store" id="storeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="storeDropdown">
+                            <li><a class="dropdown-item" href="{% url 'update_user' %}">Update Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'update_password' %}">Update User Password</a></li>
+                            <li><a class="dropdown-item" href="{% url 'update_info' %}">Update User Info</a></li>                        
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            
+                        </ul>
+                    </li>
+                    {% if user.is_superuser %}
+                        <li class="nav-item px-lg-4 dropdown">
+                            <a class="nav-link text-uppercase dropdown-toggle" href="#" id="storeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Orders</a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="storeDropdown">
+                                <li><a class="dropdown-item" href="{% url 'shipped_dash' %}">Shipped Orders</a></li>
+                                <li><a class="dropdown-item" href="{% url 'not_shipped_dash' %}">Un-Shipped Orders</a></li>
+                            </ul>
+                        </li>
+                    {%  endif %}
+                    
                 {% else %}
-                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/login">Login</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/login">Login</a></li>
                 {% endif %}
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/contact">Contact Us</a></li>
                 <li class="nav-item px-lg-4 intro-button mx-0"><a class="nav-link text-uppercase btn btn-primary " href="{% url 'cart_summary' %}"> Cart &nbsp; <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;

@@ -1964,18 +1964,22 @@ progress {
   }
 }
 .form-label {
+  text-align: left !important; 
   margin-bottom: 0.5rem;
+  font-size: medium;
 }
 
 .col-form-label {
   padding-top: calc(0.375rem + 1px);
   padding-bottom: calc(0.375rem + 1px);
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
   font-size: inherit;
   line-height: 1.5;
 }
 
 .col-form-label-lg {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
   padding-top: calc(0.5rem + 1px);
   padding-bottom: calc(0.5rem + 1px);
   font-size: 1.25rem;
@@ -2153,13 +2157,13 @@ textarea.form-control-lg {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
+  color: #e6a756;
+  background-color: #2F170F;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 16px 12px;
-  border: 1px solid #ced4da;
+  border: 1px solid #e6a756;
   border-radius: 0.375rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   -webkit-appearance: none;
@@ -2172,6 +2176,13 @@ textarea.form-control-lg {
   }
 }
 .form-select:focus {
+  
+  border-color: #f3d3ab;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(230, 167, 86, 0.25);
+}
+.form-select:hover {
+  
   border-color: #f3d3ab;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(230, 167, 86, 0.25);
@@ -4186,7 +4197,7 @@ textarea.form-control-lg {
   --bs-card-group-margin: 0.75rem;
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction:column;
   min-width: 0;
   height: var(--bs-card-height);
   word-wrap: break-word;
@@ -11095,11 +11106,13 @@ p {
 }
 
 .helptext {
+  text-align: left;
   font-size: 1rem;
   margin-left: 1rem;
 }
 
 .helptext ul {
+  text-align: left;
   list-style-type: none;
 }
 
@@ -11205,4 +11218,14 @@ p {
 
 .ml-4 {
   margin-left: 1rem; /* Add space between the image and the text */
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
 }

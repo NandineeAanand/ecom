@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+</br></br></br>
+<section class="page-section about-heading">
+    <div class="container">
+        <div class="about-heading-content">
+            <div class="row">
+                <div class="col-xl-9 col-lg-10 mx-auto">
+                    <div class="bg-faded rounded p-5">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">Checkout</span>
+                            <span class="section-heading-lower">Review your order...</span>
+                        </h2>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-10 mx-auto">
+                <div class="bg-faded card text-center rounded p-5 mb-4">
+                    <div class="d-flex align-items-center">
+                        <div class="product-details ml-4">
+                            <h2 class=" card-header section-heading mb-4">
+                              <span class="section-heading-upper">Shipping Information</span>
+                            </h2>
+                            <div class="card-body">
+                                <form method="POST" action="{% url 'billing_info' %}">
+                                    {% csrf_token %}
+                                {{ shipping_form.as_p}}
+                                
+                                
+                                
+                            </div>
+                        
+                            </br>
+                            <div class=" row justify-content-left">
+                                <div class="col-md-8">&nbsp;</div>
+                                <div class="col-md-2"><a href="{% url 'checkout' %}" class="btn btn-secondary ">&nbsp; Back &nbsp;</a></div></br>
+                                <div class="col-md-2"><button type="submit" class="btn btn-success">&nbsp; Next &nbsp;</button></div>
+                            </div>
+                        </form>
+                        </div>
+                          
+                          
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

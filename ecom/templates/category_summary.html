@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+        <br><br><br>
+        <section class="page-section about-heading">
+            <div class="container">
+                {% comment %} <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="assets/img/about.jpg" alt="..." /> {% endcomment %}
+                <div class="about-heading-content">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-10 mx-auto">
+                            <div class="bg-faded rounded p-5">
+                                <h2 class="section-heading mb-4">
+                                    <span class="section-heading-upper">Categories</span>
+                                    <span class="section-heading-lower">Choose your category below: </span>
+                                </h2>
+                                
+                                <h3 class="mb-0">
+                                {% for category in categories %}
+                                <a href="{% url 'category' category.name %}">{{category.name}}</a>
+                            </br> </br> 
+                                {% endfor %}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
